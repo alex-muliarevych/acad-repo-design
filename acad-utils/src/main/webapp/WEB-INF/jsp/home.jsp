@@ -3,23 +3,21 @@
 
 <html lang="en">
 <head>
-    <title>HOME</title>
-    <link href="<c:url value='/bootstrap.min.css'/>" rel="stylesheet">
+    <meta charset="utf-8">
+    <title>AcadFrontend</title>
+    <base href="/">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
-<div style="margin: 70px; border: 2px solid;">
-    <h2>Schema editor selection.</h2>
-    <div>
-        <div id="canceling" style="display: inline">
-            <button class="btn btn-lg btn-primary"
-                    onclick="location.href='/enter-edit-schema/1'">Open schema 1
-            </button>
-            <button class="btn btn-lg btn-primary"
-                    onclick="location.href='/enter-edit-schema/2'">Open schema 2
-            </button>
-        </div>
-    </div>
-</div>
+    <app-root></app-root>
+    <script type="text/javascript" src="inline.bundle.js"></script>
+    <script type="text/javascript" src="polyfills.bundle.js"></script>
+    <script type="text/javascript" src="styles.bundle.js"></script>
+    <script type="text/javascript" src="vendor.bundle.js"></script>
+    <script type="text/javascript" src="main.bundle.js"></script></body>
 </body>
 </html>

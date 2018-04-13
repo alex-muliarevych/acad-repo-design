@@ -6,7 +6,7 @@ import { ROUTES } from './routes';
 
 const routeConfig: ExtraOptions = {
   // enableTracing: true, // routes debugging
-  useHash: false,
+  useHash: true, // this should be true since routing is handled in Angular app internally.
 };
 
 @NgModule({

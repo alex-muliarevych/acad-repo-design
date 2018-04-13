@@ -27,3 +27,6 @@ nbdist/
 
 ### Generated AutoCad files ###
 *.dxf
+
+### Front-end build Artifacts ###
+src/main/webapp/resources/static/**/*
