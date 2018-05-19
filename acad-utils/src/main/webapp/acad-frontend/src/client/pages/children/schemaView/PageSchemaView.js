@@ -12,7 +12,7 @@ import { bindActionCreators } from 'redux';
 import { getSchema as getSchemaAction } from './actions';
 
 // Selectors
-import { getSchema } from './selectors';
+import { getSchema, getBuildingAreas, getBoxes } from './selectors';
 
 const bPageSchemaView = BEM.b('schema-view');
 
@@ -23,7 +23,9 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  schema: getSchema(state)
+  schema: getSchema(state),
+  buildingAreas: getBuildingAreas(state),
+  boxes: getBoxes(state)
 });
 
 @hot(module)
@@ -60,7 +62,9 @@ export default class PageSchemaView extends React.Component {
   renderSchema() {
     return (
       <div className={ bPageSchemaView('schema') }>
-        <Schema { ...this.props.schema } />
+        <Schema { ...this.props.schema }
+          boxes={ this.props.boxes }
+          buildingAreas={ this.props.buildingAreas } />
       </div>
     )
   }
