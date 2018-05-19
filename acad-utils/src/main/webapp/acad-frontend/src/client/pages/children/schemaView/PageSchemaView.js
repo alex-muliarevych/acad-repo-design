@@ -8,6 +8,9 @@ import { bindActionCreators } from 'redux';
 // Actions
 import { getSchema } from './actions';
 
+// Selectors
+import { getSchemaView } from './selectors';
+
 const bPageSchemaView = BEM.b('schema-view');
 
 const mapDispatchToProps = (dispatch) => ({
@@ -15,7 +18,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-
+  schemaView: getSchemaView(state)
 });
 
 @hot(module)

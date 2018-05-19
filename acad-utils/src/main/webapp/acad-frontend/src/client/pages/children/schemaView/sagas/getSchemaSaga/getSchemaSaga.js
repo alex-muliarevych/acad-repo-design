@@ -11,7 +11,7 @@ export default function* getSchemaSaga() {
 function* getSchemaHandler({ payload }) {
   try {
     const response = yield call(SchemaService.getSchema, payload);
-    yield put(getSchemaCompleted(response));
+    yield put(getSchemaCompleted(response.data));
   } catch (error) {
     console.error(error);
     yield put(getSchemaFailed(error));
