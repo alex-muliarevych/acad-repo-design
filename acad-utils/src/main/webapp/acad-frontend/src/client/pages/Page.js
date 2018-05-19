@@ -21,9 +21,9 @@ export default class Page extends React.Component {
           className={ bPage('header-link') }>
           Home
         </Link>
-        <Link to={ '/schema-view' }
+        <Link to={ '/schema' }
           className={ bPage('header-link') }>
-          Schema View
+          Schemas
         </Link>
       </header>
     );

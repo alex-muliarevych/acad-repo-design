@@ -2,7 +2,12 @@ import { createSelector } from 'reselect';
 
 import { getPages } from 'pages/selectors';
 
-export const getSchemaView = createSelector(
+const getSchemaView = createSelector(
   getPages,
   (pages) => pages.schemaView
+);
+
+export const getSchema = createSelector(
+  getSchemaView,
+  (schemaView) => schemaView.schema
 );

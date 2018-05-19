@@ -1,9 +1,13 @@
 import { all, fork } from 'redux-saga/effects';
 
-import getSchemaSaga from './getSchemaSaga/getSchemaSaga';
+import schemaSaga from './schemaSaga/schemaSaga';
+import boxesSaga from './boxesSaga/boxesSaga';
+import buildingAreasSaga from './buildingAreasSaga/buildingAreasSaga';
 
-export default function* schemaSaga() {
+export default function* schemaViewSaga() {
   yield all([
-    fork(getSchemaSaga)
+    fork(schemaSaga),
+    fork(boxesSaga),
+    fork(buildingAreasSaga)
   ]);
 }

@@ -7,7 +7,7 @@ const URLS = {
   saveBuildingArea: (id) => `/saveBuildingArea/${id}`,
 };
 
-class SchemaService {
+class ACADService {
   constructor() {
     this.fetch = axios.create({
       baseURL: 'http://localhost:8888/api'
@@ -36,4 +36,4 @@ class SchemaService {
   }
 }
 
-export default new SchemaService();
+export default new ACADService();

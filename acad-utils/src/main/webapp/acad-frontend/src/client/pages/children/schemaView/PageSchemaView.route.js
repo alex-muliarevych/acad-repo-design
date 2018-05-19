@@ -2,7 +2,7 @@ import React from 'react';
 import Loadable from 'react-loadable';
 
 export default {
-  path: "/schema-view/:schemaId?",
+  path: "/schema/:schemaId?",
   exact: true,
   title: 'Schema View',
   component: Loadable({

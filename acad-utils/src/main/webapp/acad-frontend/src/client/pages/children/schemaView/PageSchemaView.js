@@ -1,24 +1,29 @@
 import React from 'react';
 import BEM from 'helpers/BEM';
 import { hot } from 'react-hot-loader';
+import { Link } from 'react-router-dom';
+
+import Schema from 'components/Schema';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 // Actions
-import { getSchema } from './actions';
+import { getSchema as getSchemaAction } from './actions';
 
 // Selectors
-import { getSchemaView } from './selectors';
+import { getSchema } from './selectors';
 
 const bPageSchemaView = BEM.b('schema-view');
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators({ getSchema }, dispatch)
+  actions: bindActionCreators({
+    getSchema: getSchemaAction
+  }, dispatch)
 });
 
 const mapStateToProps = (state) => ({
-  schemaView: getSchemaView(state)
+  schema: getSchema(state)
 });
 
 @hot(module)
@@ -45,7 +50,9 @@ export default class PageSchemaView extends React.Component {
   renderMenu() {
     return (
       <div className={ bPageSchemaView('menu') }>
-
+        <Link to='/schema/1'>
+          Schema 1
+        </Link>
       </div>
     )
   }
@@ -53,7 +60,7 @@ export default class PageSchemaView extends React.Component {
   renderSchema() {
     return (
       <div className={ bPageSchemaView('schema') }>
-        
+        <Schema { ...this.props.schema } />
       </div>
     )
   }
