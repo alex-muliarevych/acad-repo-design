@@ -7,37 +7,13 @@ import { Switch, Route, Link } from 'react-router-dom';
 import BEM from 'helpers/BEM';
 import getRouteWithSubRoutes from 'helpers/getRouteWithSubRoutes';
 
-// Custom components
-import RightPanel from 'components/RightPanel';
-import { consumePopup } from 'components/PopupContext';
-
 import pageRoute from './Page.route';
 import './Page.less';
 
 const bPage = BEM.b('page');
 
 @hot(module)
-@consumePopup
 export default class Page extends React.Component {
-  constructor(props) {
-    super(props);
-    this.rootAnchor = createRef();
-    this.leftPanelAnchor = createRef();
-    this.rightPanelAnchor = createRef();
-  }
-
-  componentDidMount() {
-    const { registerPortal } = this.props;
-
-    registerPortal('root', this.rootAnchor);
-    registerPortal('leftPanel', this.leftPanelAnchor);
-    registerPortal('rightPanel', this.rightPanelAnchor);
-  }
-
-  componentDidCatch(error) {
-    console.error(error);
-  }
-
   renderMenu() {
     return (
       <header className={ bPage('header') }>
@@ -45,19 +21,17 @@ export default class Page extends React.Component {
           className={ bPage('header-link') }>
           Home
         </Link>
-        <Link to='/about'
+        <Link to={ '/schema-view' }
           className={ bPage('header-link') }>
-          About
+          Schema View
         </Link>
       </header>
     );
   }
 
-  renderContent() {
+  renderContent = () => {
     return (
-      <div className={ bPage('content') }>
-        Home Page
-      </div>
+      'Home Page'
     );
   }
 
@@ -70,39 +44,14 @@ export default class Page extends React.Component {
     )
   }
 
-  renderLeftPanel() {
-    return (
-      <div className={ bPage('left-panel-wrapper') } >
-        <div className={ bPage('left-panel-content') }>
-          { this.renderMenu() }
-          { this.renderChildRoutes() }
-        </div>
-
-        <div ref={ this.leftPanelAnchor } />
-      </div>
-    );
-  }
-
-  renderRightPanel() {
-    return (
-      <div className={ bPage('right-panel-wrapper') }>
-        <RightPanel />
-
-        <div ref={ this.rightPanelAnchor } />
-      </div>
-    );
-  }
-
   render() {
     return (
       <div className={ bPage('content-wrapper') }>
-        <div className={ bPage() } >
-          { this.renderLeftPanel() }
-
-          { this.renderRightPanel() }
+        { this.renderMenu() }
+        <hr />
+        <div className={ bPage('content') }>
+          { this.renderChildRoutes() }
         </div>
-
-        <div ref={ this.rootAnchor } />
       </div>
     );
   }

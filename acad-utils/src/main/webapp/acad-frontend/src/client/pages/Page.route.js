@@ -1,7 +1,7 @@
 import React from 'react';
 import Loadable from 'react-loadable';
 
-import about from './children/about/PageAbout.route';
+import schemaView from './children/schemaView/PageSchemaView.route';
 
 export default {
   path: '/',
@@ -10,6 +10,6 @@ export default {
     loading: () => <div>loading...</div>,
   }),
   childRoutes: [
-    about
+    schemaView
   ]
 };
