@@ -1,0 +1,35 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+const path = require('path');
+const pkg = require('../package.json');
+
+const webpack = require('webpack');
+const config = require('../config/webpack/prod.webpack.config')('production');
+
+process.env.VERSION = pkg.version;
+process.env.REVISION = Date.now();
+
+fs.writeFileSync(path.resolve(__dirname, '../.version'), `v${process.env.VERSION}`, 'utf8');
+fs.writeFileSync(path.resolve(__dirname, '../.revision'), process.env.REVISION, 'utf8');
+console.log('.version and .revision files were updated.');
+
+const compiler = webpack(config);
+
+compiler.run((err, stats) => {
+  if (err) {
+    console.error(err.stack || err);
+
+    if (err.details) {
+      console.error(err.details);
+    }
+    
+    return;
+  }
+
+  console.log(
+    stats.toString({
+      colors: true
+    })
+  );
+});

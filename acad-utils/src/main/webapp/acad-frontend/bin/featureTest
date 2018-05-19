@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+const path = require('path');
+const co = require('co');
+const nodeTask = require('../tasks/runNodeTask');
+const runFunctionalTests = [
+  path.resolve(__dirname, '../tasks/featureTests/runFeatureTests.js')
+];
+
+function* run() {
+  try {
+    yield nodeTask(runFunctionalTests);
+  } catch (error) {
+    console.log('========== Run tests failed ===========');
+    console.log(error);
+  }
+};
+
+module.exports = co(run);

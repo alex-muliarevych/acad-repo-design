@@ -1,0 +1,38 @@
+#!/usr/bin/env node
+
+const webpack = require('webpack');
+const express = require('express');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+const config = require('../config/webpack/dev.webpack.config')('development');
+
+const compiler = webpack(config);
+const app = express();
+
+const devMiddleware = webpackDevMiddleware(compiler, {
+  publicPath: config.output.publicPath,
+  historyApiFallback: true,
+  hot: true,
+  inline: true,
+});
+
+/**
+ * Webpack HMR middleware does not properly indexes new bundles created after the initial build.
+ * The issue on github is closed without providing proper fix, problem stays the same.
+ * @see https://github.com/webpack/webpack-dev-server/issues/875
+ * 
+ * This piece of code fixes this issue by forcing HMR update with the initial build. 
+ */
+devMiddleware.invalidate();
+
+app.use(webpackHotMiddleware(compiler, { noInfo: false }));
+app.use(devMiddleware);
+
+
+app.get('*', (req, res) => {
+  const htmlBuffer = devMiddleware.fileSystem.readFileSync(`${config.output.path}/index.html`)
+
+  res.send(htmlBuffer.toString())
+})
+
+app.listen(8181, 'localhost');

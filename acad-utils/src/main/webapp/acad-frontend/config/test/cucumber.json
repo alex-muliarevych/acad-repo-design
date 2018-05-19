@@ -1,0 +1,4 @@
+{
+  "features": "./**/features/**/*.feature",
+  "steps": ["./**/features/**/*feature.test.js"]
+}

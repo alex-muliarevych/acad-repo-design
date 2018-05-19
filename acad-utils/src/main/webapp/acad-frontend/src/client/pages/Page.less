@@ -1,0 +1,44 @@
+@import (reference) '~styles/variables.less';
+
+.page {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+
+  &__header {
+    display: flex;
+    padding: 14px;
+  }
+
+  &__header-link {
+    padding: 0 10px;
+  }
+
+  &__content {
+    padding: 20px;
+  }
+
+  &__content-wrapper {
+    position: relative;
+  }
+
+  &__left-panel-wrapper {
+    position: relative;
+    height: 100vh;
+    flex: 3;
+    border-right: 1px solid @grey;
+    box-shadow: 1px 0 10px @dark-grey;
+    z-index: 100;
+  }
+
+  &__right-panel-wrapper {
+    height: 100vh;
+    position: relative;
+    flex: 2;
+  }
+
+  &__left-panel-content {
+    height: 100%;
+    overflow: auto;
+  }
+}

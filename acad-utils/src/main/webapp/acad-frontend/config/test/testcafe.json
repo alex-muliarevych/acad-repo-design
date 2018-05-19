@@ -1,0 +1,14 @@
+{
+  "browser": "puppeteer",
+  "hostname": "localhost",
+  "port1": 1337,
+  "port2": 1338,
+  "screenshotsDirectory": "./.tests/functional/screenshots",
+  "temporaryTestFilePath": "./dist/test.js",
+  "enableScreenshotsOnFail": true,
+  "skipJsErrors": true,
+  "selectorTimeout": 30000,
+  "assertionTimeout": 30000,
+  "asyncStepTimeout": 30000,
+  "testcafeStartTimeout": 10000
+}
