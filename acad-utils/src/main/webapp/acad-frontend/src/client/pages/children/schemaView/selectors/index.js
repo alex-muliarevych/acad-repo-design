@@ -1,11 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { getPages } from 'pages/selectors';
-
-const getSchemaView = createSelector(
-  getPages,
-  (pages) => pages.schemaView
-);
+import { getSchemaView } from 'pages/selectors';
 
 export const getSchema = createSelector(
   getSchemaView,
@@ -20,4 +15,9 @@ export const getBuildingAreas = createSelector(
 export const getBoxes = createSelector(
   getSchemaView,
   (schemaView) => schemaView.boxes
+);
+
+export const getBox = (id) => createSelector(
+  getBoxes,
+  (boxes) => boxes.find(box => box.id === id)
 );

@@ -20,3 +20,24 @@ export function getBuildingAreasFailed(error) {
     error
   };
 }
+
+export function saveBuildingArea(id) {
+  return {
+    type: actionTypes.SAVE_BUILDING_AREA,
+    payload: id
+  };
+}
+
+export function saveBuildingAreaCompleted(data) {
+  return {
+    type: actionTypes.SAVE_BUILDING_AREA_COMPLETED,
+    payload: data
+  };
+}
+
+export function saveBuildingAreaFailed(error) {
+  return {
+    type: actionTypes.SAVE_BUILDING_AREA_FAILED,
+    error
+  };
+}

@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 // Actions
-import { getSchema as getSchemaAction } from './actions';
+import { getSchema as getSchemaAction, saveBox } from './actions';
 
 // Selectors
 import { getSchema, getBuildingAreas, getBoxes } from './selectors';
@@ -18,7 +18,8 @@ const bPageSchemaView = BEM.b('schema-view');
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({
-    getSchema: getSchemaAction
+    getSchema: getSchemaAction,
+    saveBox
   }, dispatch)
 });
 
@@ -64,7 +65,8 @@ export default class PageSchemaView extends React.Component {
       <div className={ bPageSchemaView('schema') }>
         <Schema { ...this.props.schema }
           boxes={ this.props.boxes }
-          buildingAreas={ this.props.buildingAreas } />
+          buildingAreas={ this.props.buildingAreas }
+          onBoxDragEnd={ this.props.actions.saveBox } />
       </div>
     )
   }

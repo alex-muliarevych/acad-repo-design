@@ -20,3 +20,24 @@ export function getSchemaFailed(error) {
     error
   };
 }
+
+export function saveSchema(id) {
+  return {
+    type: actionTypes.SAVE_SCHEMA,
+    payload: id
+  };
+}
+
+export function saveSchemaCompleted(data) {
+  return {
+    type: actionTypes.SAVE_SCHEMA_COMPLETED,
+    payload: data
+  };
+}
+
+export function saveSchemaFailed(error) {
+  return {
+    type: actionTypes.SAVE_SCHEMA_FAILED,
+    error
+  };
+}

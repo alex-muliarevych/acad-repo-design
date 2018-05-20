@@ -11,7 +11,9 @@ export default class SchemaView extends React.Component {
     gridStepX: PropTypes.number,
     gridStepY: PropTypes.number,
     boxes: PropTypes.array,
-    buildingAreas: PropTypes.array
+    buildingAreas: PropTypes.array,
+    onBoxDragEnd: PropTypes.func,
+    onBuildingAreaDragEnd: PropTypes.func
   };
 
   static defaultProps = {
@@ -69,14 +71,16 @@ export default class SchemaView extends React.Component {
         <Layer key='areas'>
           { 
             this.props.buildingAreas.map(area => (
-              <Rect key={ area.id } { ...area } />
+              <Rect key={ area.id } { ...area }
+                onDragEnd={ this.props.onBuildingAreaDragEnd } />
             ))
           }
         </Layer>
         <Layer key='boxes'>
           { 
             this.props.boxes.map(box => (
-              <Rect key={ box.id } { ...box } />
+              <Rect key={ box.id } { ...box }
+                onDragEnd={ this.props.onBoxDragEnd } />
             ))
           }
         </Layer>

@@ -9,6 +9,7 @@ export default class Rect extends React.Component {
 
   render() {
     const {
+      id,
       posX,
       posY,
       sizeX,
@@ -20,18 +21,20 @@ export default class Rect extends React.Component {
 
     return (
       <KonvaRect
+        id={ id }
         draggable={ true }
         x={ posX } y={ posY }
         width={ sizeX } height={ sizeY }
         fill={ bodyColor } stroke={ borderColor }
         opacity={ solid ? 1 : .1 }
         onClick={ this.onClick }
-        onDragEnd={ this.onDragEnd } />
+        onDragEnd={ this.props.onDragEnd } />
     );
   }
 }
 
 Rect.propTypes = {
+  onDragEnd: PropTypes.func,
   schemaId: PropTypes.number,
   id: PropTypes.number,
   frontSide: PropTypes.string,
