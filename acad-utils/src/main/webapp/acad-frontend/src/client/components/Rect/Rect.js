@@ -5,7 +5,8 @@ import { Rect as KonvaRect } from 'react-konva';
 export default class Rect extends React.Component {
   onClick = (event) => console.log(event);
 
-  onDragEnd = (event) => console.log(event);
+  onMouseOver = () => document.body.style.cursor = 'move';
+  onMouseLeave = () => document.body.style.cursor = 'default';
 
   render() {
     const {
@@ -28,7 +29,9 @@ export default class Rect extends React.Component {
         fill={ bodyColor } stroke={ borderColor }
         opacity={ solid ? 1 : .1 }
         onClick={ this.onClick }
-        onDragEnd={ this.props.onDragEnd } />
+        onDragEnd={ this.props.onDragEnd }
+        onMouseOver={ this.onMouseOver }
+        onMouseLeave={ this.onMouseLeave } />
     );
   }
 }

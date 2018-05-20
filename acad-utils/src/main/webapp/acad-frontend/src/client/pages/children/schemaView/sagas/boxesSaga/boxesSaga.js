@@ -2,9 +2,9 @@ import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 // Actions
 import { GET_BOXES, SAVE_BOX } from '../../actions/types';
+import { getBoxesCompleted, getBoxesFailed, saveBoxCompleted, saveBoxFailed } from '../../actions';
 
 // Selectors
-import { getBoxesCompleted, getBoxesFailed, saveBoxCompleted, saveBoxFailed } from '../../actions';
 import { getSchema, getBox } from '../../selectors';
 
 // Helpers

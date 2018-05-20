@@ -21,3 +21,8 @@ export const getBox = (id) => createSelector(
   getBoxes,
   (boxes) => boxes.find(box => box.id === id)
 );
+
+export const getBuildingArea = (id) => createSelector(
+  getBuildingAreas,
+  (buildingAreas) => buildingAreas.find(area => area.id === id)
+);
