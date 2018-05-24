@@ -1,4 +1,5 @@
-import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { call, put, select, takeEvery, takeLatest } from 'redux-saga/effects';
+import { delay } from 'redux-saga';
 
 // Actions
 import { GET_BOXES, SAVE_BOX } from '../../actions/types';
@@ -13,9 +14,9 @@ import { clamp } from 'helpers/MathHelpers';
 // Services
 import ACADService from 'services/ACADService';
 
-export default function* getBoxesSaga() {
+export default function* boxesSaga() {
   yield takeEvery(GET_BOXES, getBoxesHandler);
-  yield takeEvery(SAVE_BOX, saveBoxHandler);
+  yield takeLatest(SAVE_BOX, saveBoxHandler);
 }
 
 function* getBoxesHandler({ payload }) {
@@ -29,15 +30,26 @@ function* getBoxesHandler({ payload }) {
 }
 
 function* saveBoxHandler({ payload }) {
-  const { currentTarget: { attrs } } = payload;
+  let schema = yield select(getSchema);
+  let item, attrs;
 
-  const schema = yield select(getSchema);
-  const item = yield select(getBox(attrs.id));
+  if (!payload.id) {
+    attrs = payload.currentTarget.attrs;
+    
+    item = yield select(getBox(attrs.id));
+  }
 
   try {
-    const updatedBox = updateBox(item, attrs, schema);
-    const response = yield call(ACADService.saveBox, item.schemaId, updatedBox);
-    yield put(saveBoxCompleted(response.data));
+    const updatedBox = attrs
+      ? updateBox(item, attrs, schema)
+      : {
+        ...payload,
+        posX: clamp(payload.posX, 0, schema.sizeX - payload.sizeX),
+        posY: clamp(payload.posY, 0, schema.sizeY - payload.sizeY)
+      };
+    yield put(saveBoxCompleted(updatedBox));
+    yield delay(300);
+    yield call(ACADService.saveBox, updatedBox.schemaId, updatedBox);
   } catch (error) {
     console.error(error);
     yield put(saveBoxFailed(item));

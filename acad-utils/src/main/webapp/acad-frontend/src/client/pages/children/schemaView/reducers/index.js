@@ -3,12 +3,16 @@ import * as actionTypes from '../actions/types';
 const defaultState = {
   schema: {},
   boxes: [],
-  buildingAreas: []
+  buildingAreas: [],
+  selectedItem: {
+    type: null,
+    id: null
+  }
 };
 
 export default function schemaViewReducer(state = defaultState, { type, payload, error }) {
   switch (type) {
-    case actionTypes.SAVE_SCHEMA: return { ...state, schema: payload };
+    case actionTypes.SAVE_SCHEMA_COMPLETED: return { ...state, schema: payload };
     case actionTypes.SAVE_BOX_COMPLETED: return { 
       ...state, boxes: updateListEntry(state.boxes, payload)
     };
@@ -26,6 +30,8 @@ export default function schemaViewReducer(state = defaultState, { type, payload,
     case actionTypes.GET_SCHEMA_COMPLETED: return { ...state, schema: payload };
     case actionTypes.GET_BOXES_COMPLETED: return { ...state, boxes: payload };
     case actionTypes.GET_BUILDING_AREAS_COMPLETED: return { ...state, buildingAreas: payload };
+
+    case actionTypes.SELECT_ITEM: return { ...state, selectedItem: payload };
       
     default:
       return state;

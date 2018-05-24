@@ -1,16 +1,21 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
-import { GET_SCHEMA } from '../../actions/types';
+import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { delay } from 'redux-saga';
+import { GET_SCHEMA, SAVE_SCHEMA } from '../../actions/types';
 import {
   getSchemaCompleted,
   getSchemaFailed,
   getBoxes,
-  getBuildingAreas
+  getBuildingAreas,
+  saveSchemaCompleted,
+  saveBoxFailed,
+  saveSchemaFailed
 } from '../../actions';
 
 import ACADService from 'services/ACADService';
 
-export default function* getSchemaSaga() {
+export default function* schemaSaga() {
   yield takeEvery(GET_SCHEMA, getSchemaHandler);
+  yield takeLatest(SAVE_SCHEMA, saveSchemaHandler);
 }
 
 function* getSchemaHandler({ payload }) {
@@ -22,5 +27,16 @@ function* getSchemaHandler({ payload }) {
   } catch (error) {
     console.error(error);
     yield put(getSchemaFailed(error));
+  }
+}
+
+function* saveSchemaHandler({ payload }) {
+  try {
+    yield put(saveSchemaCompleted(payload));
+    yield delay(300);
+    yield call(ACADService.saveSchema, payload.id, payload);
+  } catch (error) {
+    console.error(error);
+    yield put(saveSchemaFailed(error));
   }
 }

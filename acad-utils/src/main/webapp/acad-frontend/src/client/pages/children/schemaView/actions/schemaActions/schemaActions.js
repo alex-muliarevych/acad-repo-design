@@ -21,10 +21,10 @@ export function getSchemaFailed(error) {
   };
 }
 
-export function saveSchema(id) {
+export function saveSchema(payload) {
   return {
     type: actionTypes.SAVE_SCHEMA,
-    payload: id
+    payload
   };
 }
 

@@ -77,7 +77,7 @@ module.exports = (mode = 'development') => {
             ]
           })
         }, {
-          test: /\.(eot|svg|ttf|woff|woff2)$/,
+          test: /\.(eot|svg|ttf|woff|woff2|png|jpg)$/,
           use: [{ loader: 'ignore-loader' }]
         }
       ]

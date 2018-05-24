@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { Rect as KonvaRect } from 'react-konva';
 
 export default class Rect extends React.Component {
-  onClick = (event) => console.log(event);
-
   onMouseOver = () => document.body.style.cursor = 'move';
   onMouseLeave = () => document.body.style.cursor = 'default';
 
@@ -28,7 +26,8 @@ export default class Rect extends React.Component {
         width={ sizeX } height={ sizeY }
         fill={ bodyColor } stroke={ borderColor }
         opacity={ solid ? 1 : .1 }
-        onClick={ this.onClick }
+        onClick={ this.props.onClick }
+        onDragStart={ this.props.onDragStart }
         onDragEnd={ this.props.onDragEnd }
         onMouseOver={ this.onMouseOver }
         onMouseLeave={ this.onMouseLeave } />
@@ -38,21 +37,22 @@ export default class Rect extends React.Component {
 
 Rect.propTypes = {
   onDragEnd: PropTypes.func,
-  schemaId: PropTypes.number,
-  id: PropTypes.number,
+  onDragStart: PropTypes.func,
+  schemaId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   frontSide: PropTypes.string,
-  buildingAreaId: PropTypes.number,
-  accessPointId: PropTypes.number,
+  buildingAreaId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  accessPointId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   keepArea: PropTypes.bool,
   text: PropTypes.string,
-  posX: PropTypes.number,
-  posY: PropTypes.number,
-  posZ: PropTypes.number,
-  sizeX: PropTypes.number,
-  sizeY: PropTypes.number,
-  sizeZ: PropTypes.number,
-  rows: PropTypes.number,
-  cols: PropTypes.number,
+  posX: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  posY: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  posZ: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  sizeX: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  sizeY: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  sizeZ: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  rows: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  cols: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   bodyColor: PropTypes.string,
   borderColor: PropTypes.string,
   solid: PropTypes.bool,

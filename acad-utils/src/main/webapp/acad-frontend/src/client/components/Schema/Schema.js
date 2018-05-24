@@ -4,16 +4,17 @@ import { Stage, Layer, Line } from 'react-konva';
 
 import Rect from 'components/Rect';
 
-export default class SchemaView extends React.Component {
+export default class Schema extends React.Component {
   static propTypes = {
-    sizeX: PropTypes.number,
-    sizeY: PropTypes.number,
-    gridStepX: PropTypes.number,
-    gridStepY: PropTypes.number,
+    sizeX: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    sizeY: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    gridStepX: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    gridStepY: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     boxes: PropTypes.array,
     buildingAreas: PropTypes.array,
     onBoxDragEnd: PropTypes.func,
-    onBuildingAreaDragEnd: PropTypes.func
+    onBuildingAreaDragEnd: PropTypes.func,
+    onClick: PropTypes.func
   };
 
   static defaultProps = {
@@ -57,6 +58,15 @@ export default class SchemaView extends React.Component {
     return [...horizontalLines, ...verticalLines];
   }
 
+  onClick = (type) => (event) => {
+    this.props.onClick(type, event.target.attrs.id);
+    event.cancelBubble = true;
+  };
+
+  onClickSchema = this.onClick('schema');
+  onClickBuildingArea = this.onClick('buildingArea');
+  onClickBox = this.onClick('box');
+
   render() {
     const { sizeX, sizeY } = this.props;
 
@@ -64,7 +74,8 @@ export default class SchemaView extends React.Component {
       <Stage
         ref={ this.stage }
         width={ sizeX }
-        height={ sizeY }>
+        height={ sizeY }
+        onClick={ this.onClickSchema }>
         <Layer key='grid'>
           { this.renderGrid() }
         </Layer>
@@ -72,7 +83,8 @@ export default class SchemaView extends React.Component {
           { 
             this.props.buildingAreas.map(area => (
               <Rect key={ area.id } { ...area }
-                onDragEnd={ this.props.onBuildingAreaDragEnd } />
+                onDragEnd={ this.props.onBuildingAreaDragEnd }
+                onClick={ this.onClickBuildingArea } />
             ))
           }
         </Layer>
@@ -80,7 +92,8 @@ export default class SchemaView extends React.Component {
           { 
             this.props.boxes.map(box => (
               <Rect key={ box.id } { ...box }
-                onDragEnd={ this.props.onBoxDragEnd } />
+                onDragEnd={ this.props.onBoxDragEnd }
+                onClick={ this.onClickBox } />
             ))
           }
         </Layer>
