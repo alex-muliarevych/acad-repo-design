@@ -56,27 +56,27 @@ public class InsideBox extends SchemaObject {
     private String text;
 
     /**
-     * Start point at left-top corner of box-rectangle by OX.
+     * View only on UI side panel.
      */
     private float posX;
     /**
-     * Start point at left-top corner of box-rectangle by OY.
+     * View only on UI side panel.
      */
     private float posY;
     /**
-     * Just modification and view at UI side panel.
+     * View only on UI side panel.
      */
     private float posZ;
     /**
-     * Size X of inside box-rectangle.
+     * View only on UI side panel.
      */
     private float sizeX;
     /**
-     * Size Y of inside box-rectangle.
+     * View only on UI side panel.
      */
     private float sizeY;
     /**
-     * Just modification and view at UI side panel.
+     * View only on UI side panel.
      */
     private float sizeZ;
 
@@ -90,6 +90,7 @@ public class InsideBox extends SchemaObject {
      */
     @Nullable
     private String borderColor;
+
     /**
      * Define if object is filled with color fully or not, 'true' - fully,
      * 'false' - make transparency 90 %.
