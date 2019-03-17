@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @Slf4j
@@ -90,6 +91,11 @@ public class MainCadController {
     @RequestMapping(value = "/api/getInsideBoxes/{id}", method = RequestMethod.GET)
     public List<InsideBox> getInsideBoxesBySchemaId(@PathVariable Integer id) {
         return insideBoxesDB.getAllEntitiesBySchemaId(id);
+    }
+
+    @RequestMapping(value = "/api/getInsideBoxes/{id}/{parentBoxId}", method = RequestMethod.GET)
+    public List<InsideBox> getInsideBoxesBySchemaAndParentBoxIds(@PathVariable Integer id, @PathVariable Integer parentBoxId) {
+        return insideBoxesDB.getAllEntitiesBySchemaId(id).stream().filter(e -> e.getParentBoxId() == parentBoxId).collect(Collectors.toList());
     }
 
     @RequestMapping(value = "/api/saveInsideBox/{schemaId}", method = RequestMethod.POST)
